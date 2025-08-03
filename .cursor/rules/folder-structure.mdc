@@ -1,0 +1,21 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+name: Folder Structure
+description: Enforces a consistent frontend folder layout and TypeScript file placement.
+tags: [structure, frontend, react, typescript]
+---
+
+- Place admin components in `src/admin/components`.
+- Frontend React components in `src/frontend/components`.
+- Shared components in `src/shared/components`.
+- Shared utilities belong in `src/utils`.
+- React hooks in `src/hooks`
+- React stores for admin `src/admin/stores/`
+- React stores for frontend `src/frontend/stores`
+- React shared stores `src/shared/stores`
+- Admin Views are stored in `src/admin/views`
+- Frontend views as stored in `src/frontend/views`

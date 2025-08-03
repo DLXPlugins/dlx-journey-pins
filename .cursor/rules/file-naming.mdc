@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+name: File Naming Conventions
+description: Maintain consistent file naming for React components and utilities.
+tags: [naming, conventions, components]
+---
+
+- Use **CamcelCase** for React components (e.g., `MapSidebar.tsx`).
+- Use **camelCase** for utility and logic files (e.g., `getDefaultCursor.ts`).
+- Use **kebab-case** for SCSS/CSS files if used (e.g., `map-sidebar.module.scss`).
+- Use WordPress coding standards and filenaming standards to name files in PSR-4 format (/Admin/Admin_Components.php)
+- Use WordPress JavaScript standards for filenames.

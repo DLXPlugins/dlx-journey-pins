@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+name: JourneyPins Project Overview
+description: High-level project context for the JourneyPins WordPress plugin. Includes MVP scope and extensibility goals.
+tags: [overview, architecture, mvp, extensibility]
+---
+
+## 🧭 Project: JourneyPins
+
+A WordPress plugin for visually showcasing travel history via interactive maps. Uses a cursor-based model to sync map interactions with sidebar content. Built with **TypeScript**, **React**, and extensible by design.
+
+---
+
+## ✅ MVP Scope
+
+### Frontend (User-Facing)
+
+- Interactive **TomTom-based map**
+  - Ships with a world map and country-level data
+  - Selectable pins (countries) with hover/focus behavior
+- Dynamic **sidebar**
+  - Updates based on selected pin
+  - Displays custom content (e.g., story, photos, metadata)
+- **Cursor system** (global app state)
+  - Tracks currently selected pin or region
+  - Shared by map, sidebar, and URL routing (TanStack Router optional)
+- **Minimal routing** support
+  - Clicking a pin can change the URL (`/map/france`)
+  - JS handles linking (no hard dependencies on pretty permalinks)
+
+### Backend (Admin UI)
+
+- Easy-to-use pin editor (initially manual entry)
+  - Pin ID, title, content, image, etc.
+- Pins stored in a **custom database table**
+  - Includes `site_id` for multisite support
+- REST API for retrieving pin data
+
+---
+
+## 🧱 Architecture
+
+- **Language**: TypeScript
+- **Framework**: React (for frontend/admin)
+- **Map**: TomTom SDK (future-ready for other tile providers)
+- **State Management**: Zustand or Context for cursor + sidebar sync
+- **WP API**: Custom REST endpoints + WordPress hooks
+- **Plugin Base**: Built with extensibility in mind for add-ons
+- **Folder Structure** (suggested):
+
+```txt
+src/
+  components/     # React UI
+  lib/            # Shared helpers
+  state/          # Zustand or context logic
+  types/          # Shared TS interfaces
+  extensions/     # Add-on hook registries
+  map/            # TomTom-specific logic
+```
+
+---
+
+## 🔌 Extensibility Goals (Planned Add-ons)
+
+- Support for **U.S. states**, **European countries**, or **custom regions**
+- Additional **map tile providers** (e.g., Leaflet, Mapbox)
+- **Custom pin types** (e.g., golf courses, hometowns, restaurants)
+- Enhanced **routing** with pretty permalinks (e.g., `/journey/italy`)
+- **Import/export** support (CSV or JSON)
+- **Photo galleries** or **media pin embeds**
+- **Shortcode or block** to embed individual maps in posts
+- **Pin filters** by type, tag, or category
+
+---
+
+## ⚙️ Multisite Considerations
+
+- All custom tables must include `site_id`
+- Each subsite manages its own pins
+- Admin UIs filter by the current blog (via `get_current_blog_id()`)
+
+---
+
+## 🔐 Developer UX Goals
+
+- Use **discriminated unions** for cursor state
+- All state interactions go through `useCursor()` and `usePins()`
+- Encourage 3rd-party devs to use hooks and extension points
+- Avoid hardcoded logic or IDs in core plugin files
+- Expose registration APIs for new pin types, sidebar blocks, etc.
+
+---
+
+## 📝 Notes
+
+- First release will not include pretty URLs or routing add-ons.
+- Everything needed for interactive travel storytelling is included in MVP.
+- Designed from the start to allow opt-in complexity as the plugin grows.
